@@ -1,6 +1,5 @@
-﻿using Tabuleiro;
-
-namespace XadrezConsole.Tabuleiro
+﻿
+namespace Tabuleiros
 {
     class Peca
     {
@@ -14,6 +13,7 @@ namespace XadrezConsole.Tabuleiro
             Posicao = posicao;
             Cor = cor;
             Tab = tab;
+            QuantMovimentos = 0;
         }
     }
 }
