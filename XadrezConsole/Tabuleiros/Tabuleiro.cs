@@ -23,7 +23,7 @@ namespace Tabuleiros
             return _pecas[linha, coluna];
         }
 
-        public Peca Pecas(Posicao pos)
+        public Peca PecasP(Posicao pos)
         {
             return _pecas[pos.Linha, pos.Coluna];
         }
@@ -38,10 +38,22 @@ namespace Tabuleiros
             p.Posicao = pos;
         }
 
+        public Peca RetirarPeca(Posicao pos)
+        {
+            if (PecasP(pos) == null)
+            {
+                return null;
+            }
+            Peca aux = PecasP(pos);
+            aux.Posicao = null;
+            _pecas[pos.Linha, pos.Coluna] = null;
+            return aux;
+        }
+
         public bool ExistePeca(Posicao pos)
         {
             validarPosicao(pos);
-            return Pecas(pos) != null;
+            return PecasP(pos) != null;
         }
 
         public bool posicaoValida(Posicao pos)

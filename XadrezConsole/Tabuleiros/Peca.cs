@@ -15,5 +15,9 @@ namespace Tabuleiros
             Tab = tab;
             QuantMovimentos = 0;
         }
+        public void IncrementarQtnMovimentos()
+        {
+            QuantMovimentos++;
+        }
     }
 }

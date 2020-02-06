@@ -1,11 +1,11 @@
 ﻿using System;
 using Tabuleiros;
+using Xadrez;
 
 namespace XadrezConsole
 {
     class Tela
     {
-
         public static void ImprimirTabuleiro(Tabuleiro tab)
         {
             for (int i = 0; i < tab.Linhas; i++)
@@ -13,7 +13,7 @@ namespace XadrezConsole
                 Console.Write(tab.Linhas - i + " ");
                 for (int j = 0; j < tab.Colunas; j++)
                 {
-                    if (tab.Pecas(i,j) == null)
+                    if (tab.Pecas(i, j) == null)
                     {
                         Console.Write("- ");
                     }
@@ -27,6 +27,15 @@ namespace XadrezConsole
             }
             Console.WriteLine("  a b c d e f g h");
         }
+
+        public static PosicaoXadrez LerPosicaoXadrez()
+        {
+            string s = Console.ReadLine();
+            char coluna = s[0];
+            int linha = int.Parse(s[1] + "");
+            return new PosicaoXadrez(coluna, linha);
+        }
+
         public static void ImprimirPeca(Peca peca)
         {
             if (peca.Cor == Cor.Branca)
@@ -39,9 +48,6 @@ namespace XadrezConsole
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write(peca);
                 Console.ForegroundColor = aux;
-            }
-            {
-
             }
         }
     }
