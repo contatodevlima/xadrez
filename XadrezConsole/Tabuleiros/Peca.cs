@@ -43,5 +43,10 @@ namespace Tabuleiros
         {
             QuantMovimentos++;
         }
+
+        public void DecrementarQtnMovimentos()
+        {
+            QuantMovimentos--;
+        }
     }
 }
