@@ -11,10 +11,9 @@ namespace Xadrez
         public int Turno { get; private set; }
         public Cor JogadorAtual { get; private set; }
         public bool Terminada { get; set; }
-        private HashSet<Peca> Pecas;
-        private HashSet<Peca> Capturadas;
+        private HashSet<Peca> PecasConjunto;
+        private HashSet<Peca> CapturadasConjunto;
         public bool Xeque { get; private set; }
-
 
         public PartidaDeXadrez()
         {
@@ -23,8 +22,8 @@ namespace Xadrez
             JogadorAtual = Cor.Branca;
             Terminada = false;
             Xeque = false;
-            Pecas = new HashSet<Peca>();
-            Capturadas = new HashSet<Peca>();
+            PecasConjunto = new HashSet<Peca>();
+            CapturadasConjunto = new HashSet<Peca>();
             ColocarPecas();
         }
 
@@ -37,7 +36,7 @@ namespace Xadrez
 
             if (pecaCapturada != null)
             {
-                Capturadas.Add(pecaCapturada);
+                CapturadasConjunto.Add(pecaCapturada);
             }
             return pecaCapturada;
         }
@@ -49,8 +48,9 @@ namespace Xadrez
             if (pecaCapturada != null)
             {
                 Tab.ColocarPeca(pecaCapturada, destino);
-                Capturadas.Remove(pecaCapturada);
+                CapturadasConjunto.Remove(pecaCapturada);
             }
+            Tab.ColocarPeca(p, origem);
         }
 
         public void RealizaJogada(Posicao origem, Posicao destino)
@@ -114,7 +114,7 @@ namespace Xadrez
         public HashSet<Peca> PecasCapturadas(Cor cor)
         {
             HashSet<Peca> aux = new HashSet<Peca>();
-            foreach (Peca item in Capturadas)
+            foreach (Peca item in CapturadasConjunto)
             {
                 if (item.Cor == cor)
                 {
@@ -127,7 +127,7 @@ namespace Xadrez
         public HashSet<Peca> PecasEmJogo(Cor cor)
         {
             HashSet<Peca> aux = new HashSet<Peca>();
-            foreach (Peca item in Capturadas)
+            foreach (Peca item in PecasConjunto)
             {
                 if (item.Cor == cor)
                 {
@@ -182,6 +182,7 @@ namespace Xadrez
         public void ColocarNovaPeca(char coluna, int linha, Peca peca)
         {
             Tab.ColocarPeca(peca, new PosicaoXadrez(coluna, linha).ToPosicao());
+            PecasConjunto.Add(peca);
         }
 
         private void ColocarPecas()
